@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Show Images</title>
+</head>
+
+<body>
+    <div align = "center">
+      <img id='showimg' src=""  border="2" width:100%; height:auto;>  
+    </div>
+    
+    <script type="text/javascript">
+        self.setInterval("loadXMLDoc()", 10);
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("showimg").src = "data:image/png;base64," + xmlhttp.responseText;
+                    console.log("base64:"+xmlhttp.responseText)
+                }
+            }
+            xmlhttp.open("GET", "/simulate/getimage", true);
+            xmlhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>
